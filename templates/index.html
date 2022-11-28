@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Number Classifier</title>
+    <title>小松菜奈とあいみょんの顔分類アプリ</title>
     <link rel="stylesheet" href="./static/stylesheet.css">
 </head>
 <body>
     <header>   
-        <img class="header_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy">
-        <a class="header-logo" href="#">Number Classifier</a>
+        <!-- <img class="header_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy"> -->
+        <p class="header-logo">似ている2人を顔識別するアプリ</p>
     </header>
 
     <div class="main">    
-        <h2> AIが送信された画像の数字を識別します</h2>
-        <p>画像を送信してください</p>
+        <h2> 小松菜奈 or あいみょんをAIが識別します</h2>
+        <p>画像をアップロードしてください</p>
         <form method="POST" enctype="multipart/form-data">
             <input class="file_choose" type="file" name="file">
             <input class="btn" value="submit!" type="submit">
         </form>
-        <div class="answer">{{answer}}</div>
+        <div class="upimage answer"><img src="{{ gazou }}" alt="{{ gazou }}" width="300"><br/><strong>{{answer}}</strong></div>
+        <!-- <div class="answer">{{answer}}</div> -->
     </div>
 
     <footer>
-        <img class="footer_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy">
-        <small>&copy; 2019 Aidemy, inc.</small>   
+            <!-- <img class="footer_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy"> -->
+        <small>&copy; 2022 R.Takahashi</small>   
     </footer>
 </body>
 </html>

@@ -7,10 +7,10 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 
 
-classes = ["0","1","2","3","4","5","6","7","8","9"]
-image_size = 28
+classes = ["小松菜奈","あいみょん"]
+image_size = 150
 
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ app = Flask(__name__)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-model = load_model('./nanamodel.h5')#学習済みモデルをロード
+model = load_model('./model.h5')#学習済みモデルをロード
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -34,18 +34,18 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
-            filepath = os.path.join(UPLOAD_FOLDER, filename)
+            filepath = os.path.join(UPLOAD_FOLDER, filename)         
 
             #受け取った画像を読み込み、np形式に変換
-            img = image.load_img(filepath, grayscale=True, target_size=(image_size,image_size))
+            img = image.load_img(filepath, grayscale=False, target_size=(image_size,image_size))
             img = image.img_to_array(img)
             data = np.array([img])
             #変換したデータをモデルに渡して予測する
             result = model.predict(data)[0]
             predicted = result.argmax()
-            pred_answer = "これは " + classes[predicted] + " です"
+            pred_answer = "これは " + classes[predicted] + " と判定されました"
 
-            return render_template("index.html",answer=pred_answer)
+            return render_template("index.html",answer=pred_answer, gazou=filepath)
 
     return render_template("index.html",answer="")
 
